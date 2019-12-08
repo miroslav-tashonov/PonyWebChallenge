@@ -1,6 +1,6 @@
 # Pony Web Challenge
 <br/>
-This is my original code representation of the pony challenge
+This is my original code representation of the pony challenge. Enjoy playing :) 
 <br/>
 <br/>
 <h2>Screenshots :</h2> 

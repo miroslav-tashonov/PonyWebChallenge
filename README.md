@@ -2,7 +2,8 @@
 <br/>
 This is my original code representation of the pony challenge
 <br/>
-Screenshots : 
+<br/>
+# Screenshots : 
 <br />
 <br />
 <p float="left">

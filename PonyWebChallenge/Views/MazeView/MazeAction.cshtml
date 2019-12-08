@@ -1,0 +1,96 @@
+﻿@model PonyWebChallenge.Models.MazeActionModel
+
+<br />
+<br />
+<p>Use arrows &#8592; &#8593; &#8594; and &#8595; to move, or SPACE to stay in place this turn.</p>
+
+<div class="container">
+    <p id="mazeCanvas" class="mazeCanvasProps">
+
+    </p>
+</div>
+<div>
+    <button id="NewGame" class="btn btn-default">New Game</button>
+</div>
+
+<script>
+        function printMaze(mazeId) {
+            $.ajax({
+                type: "GET",
+                url: "/pony-challenge/Maze/" + mazeId + "/print",
+                contentType: 'application/json',
+                success: function (data) {
+                    $("#mazeCanvas").html(data);
+                },
+                error: function (jqXHR) {
+                    alert(jqXHR.responseText);
+                },
+            });
+        }
+
+        $(document).ready(function () {
+            var mazeId = '@Html.Raw(Model.MazeId)';
+            printMaze(mazeId);
+
+            $("#NewGame").click(function () {
+                $.ajax({
+                    type: "GET",
+                    url: "/pony-challenge/Maze/" + mazeId,
+                    contentType: 'application/json',
+                    success: function (data) {
+                        window.location.href = "/MazeView/MazeAction/" + data.MazeId;
+                    },
+                    error: function (jqXHR) {
+                        alert(jqXHR.responseText);
+                    },
+                });
+            });
+        });
+
+
+        $(document).keydown(function (e) {
+            var mazeId = '@Html.Raw(Model.MazeId)';
+            var direction;
+            switch (e.which) {
+                case 32: // SPACE
+                    direction = "stay";
+                break;
+                case 37: // LEFT
+                    direction = "west";
+                break;
+                case 38: // UP
+                    direction = "north";
+                break;
+                case 39: // RIGHT
+                    direction = "east";
+                break;
+                case 40: // DOWN
+                    direction = "south";
+                break;
+                default: return;
+            }
+            e.preventDefault();
+
+            var moveMazeModel = new Object();
+            moveMazeModel.Direction = direction;
+
+            $.ajax({
+                type: "POST",
+                url: "/pony-challenge/Maze/" + mazeId,
+                data: JSON.stringify(moveMazeModel),
+                contentType: 'application/json',
+                success: function (data) {
+                    if (data.StateResult == 3) {
+                        window.location.href = "/MazeView/SuccessfullEndgame/" + mazeId;
+                    }
+                    if (data.StateResult == 4) {
+                        window.location.href = "/MazeView/FailedEndgame/" + mazeId;
+                    }
+                    printMaze(mazeId);
+                },
+                error: function (jqXHR) {
+                    alert(jqXHR.responseText);
+                },
+            });
+        });
+</script>

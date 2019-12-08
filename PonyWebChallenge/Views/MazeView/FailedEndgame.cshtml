@@ -1,0 +1,29 @@
+﻿@model PonyWebChallenge.Models.MazeActionModel
+<br />
+
+<img src="~/Resources/dokomun.jpg" class="saveThePony" />
+
+<br />
+<div>
+    <button id="NewGame" class="btn btn-default">New Game</button>
+</div>
+
+<script>
+$(document).ready(function () {
+            var mazeId = '@Html.Raw(Model.MazeId)';
+
+            $("#NewGame").click(function () {
+                $.ajax({
+                    type: "GET",
+                    url: "/pony-challenge/Maze/" + mazeId,
+                    contentType: 'application/json',
+                    success: function (data) {
+                        window.location.href = "/MazeView/MazeAction/" + data.MazeId;
+                    },
+                    error: function (jqXHR) {
+                        alert(jqXHR.responseText);
+                    },
+                });
+            });
+});
+</script>

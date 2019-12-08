@@ -1,0 +1,79 @@
+﻿@model PonyWebChallenge.Models.MazeInitModel
+
+<br />
+<br />
+<div class="container">
+    <div>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label class="control-label">Maze Width ( between 15 and 25 )</label>
+            <input id="txtMazeWidth" runat="server" name="MazeWidth" asp-for="MazeWidth" type="number" class="form-control" min="15" max="25"/>
+            <span asp-validation-for="MazeWidth" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Maze Height ( between 15 and 25 )</label>
+            <input id="txtMazeHeight" runat="server" name="MazeHeight" asp-for="MazeHeight" type="number" class="form-control" min="15" max="25" />
+            <span asp-validation-for="MazeHeight" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Player Name</label>
+            @Html.DropDownList("PlayerName", (List<SelectListItem>)ViewBag.Ponies, "-- Select Your Pony --", new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Difficulty</label>
+            @Html.DropDownList("Difficulty", (List<SelectListItem>)ViewBag.Difficulties, "-- Select Your Difficulty --", new { @class = "form-control" })
+        </div>
+    </div>
+    <div >
+        <button id="CreateMaze" class="btn btn-default">Create Maze</button>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#CreateMaze").click(function () {
+            var maze = new Object();
+            maze.MazeWidth = $('#txtMazeWidth').val();
+            maze.MazeHeight = $('#txtMazeHeight').val();
+            maze.PlayerName = $("#PlayerName option:selected").text();
+            maze.Difficulty = $("#Difficulty option:selected").index()-1;
+
+            if (maze.PlayerName == "-- Select Your Pony --") {
+                alert("Please Select your Pony");
+            }
+            else if (maze.Difficulty == "-- Select Your Difficulty --") {
+                alert("Please Select your Difficulty");
+            }
+            else
+            {
+                $.ajax({
+                    type: "POST",
+                    url: "/pony-challenge/Maze",
+                    data: JSON.stringify(maze),
+                    contentType: 'application/json',
+                    success: function (data) {
+                        ajaxCallCreateMazeCharacters(data);
+                    },
+                    error: function (jqXHR) {
+                        alert(jqXHR.responseJSON["Message"]);
+                    },
+                });
+            }
+
+            function ajaxCallCreateMazeCharacters(mazeId) {
+                $.ajax({
+                    type: "GET",
+                    url: "/pony-challenge/Maze/" + mazeId,
+                    contentType: 'application/json',
+                    success: function (data) {
+                        window.location.href = "/MazeView/MazeAction/" + data.MazeId;
+                    },
+                    error: function (jqXHR) {
+                        alert(jqXHR.responseJSON["Message"]);
+                    },
+                });
+            }
+        });
+    });
+</script>  

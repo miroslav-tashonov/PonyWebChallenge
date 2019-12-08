@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29509.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PonyWebChallenge", "PonyWebChallenge.csproj", "{5392833C-BF98-4D5E-B2AF-ECC5333C8BDE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PonyWebChallenge.Tests", "..\PonyWebChallenge.Tests\PonyWebChallenge.Tests.csproj", "{281CC41D-1DEF-44B2-B4E2-CA0352C0AEBD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5392833C-BF98-4D5E-B2AF-ECC5333C8BDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5392833C-BF98-4D5E-B2AF-ECC5333C8BDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5392833C-BF98-4D5E-B2AF-ECC5333C8BDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5392833C-BF98-4D5E-B2AF-ECC5333C8BDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{281CC41D-1DEF-44B2-B4E2-CA0352C0AEBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{281CC41D-1DEF-44B2-B4E2-CA0352C0AEBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{281CC41D-1DEF-44B2-B4E2-CA0352C0AEBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{281CC41D-1DEF-44B2-B4E2-CA0352C0AEBD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A23D1893-4B3C-43BC-B45C-831810746E0B}
+	EndGlobalSection
+EndGlobal
